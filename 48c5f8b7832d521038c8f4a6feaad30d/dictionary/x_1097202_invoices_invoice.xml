@@ -18,6 +18,7 @@
         <element default="javascript:gs.now()" dynamic_default_value="fb7553e85f220100a9ad2572f2b477b4" label="Invoice Date" max_length="255" name="invoice_date" read_only="true" type="glide_date" use_dynamic_default="true"/>
         <element default="INVO23005120" label="Reference no." max_length="40" name="reference_no" read_only="true" type="string"/>
         <element label="New Field 1" max_length="4000" name="new_field_1" type="simple_name_values"/>
+        <element label="Comment" max_length="40" name="comment" type="string"/>
         <element choice="1" default="Posting Pending" label="Post Flag" max_length="40" name="post_flag" read_only="true" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Posting Failed" sequence="2" value="Posting Failed"/>
@@ -36,6 +37,7 @@
                 <element inactive_on_update="false" label="Invoice" sequence="0" value="Invoice"/>
             </choice>
         </element>
+        <element label="workflow context" max_length="40" name="workflow_context" type="string"/>
         <element default="VND" label="Currency" max_length="32" name="currenc0" read_only="true" reference="fx_currency" type="reference"/>
         <element label="DStamp" max_length="40" name="dstamp" type="string"/>
         <element label="PO Line Item Sub Total" max_length="38" name="po_line_item_sub_tota0" read_only="true" type="currency"/>
@@ -45,6 +47,12 @@
         <element label="single/multiple" max_length="40" name="single_multiple" type="string"/>
         <element default="Conditional" label="LevelType" max_length="40" name="leveltype" type="string"/>
         <element label="Tax Amount" max_length="38" name="tax_amount" read_only="true" type="currency"/>
+        <element choice="1" label="After RFI" max_length="40" name="after_rfi" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Send back to me" value="Send back to me"/>
+                <element inactive_on_update="false" label="Start form beginning" value="Start form beginning"/>
+            </choice>
+        </element>
         <element label="Total Amount Without Tax" max_length="38" name="total_amount_without_tax" read_only="true" type="currency"/>
         <element label="Sequence No" max_length="40" name="sequence_no" type="string"/>
         <element label="WHT Requied" max_length="40" name="wht_requied" read_only="true" type="string"/>
@@ -56,6 +64,7 @@
         <element default="javascript:gs.now()" dynamic_default_value="fb7553e85f220100a9ad2572f2b477b4" label="Posting Date" max_length="255" name="posting_date" read_only="true" type="glide_date" use_dynamic_default="true"/>
         <element default="1A23BBA212" label="Invoice No." max_length="40" name="invoice_no" read_only="true" type="string"/>
         <element default="V4 - Sample Tax Code 8%" label="Tax Code" max_length="40" name="tax_code" read_only="true" type="string"/>
+        <element label="Previous Approvers" max_length="255" name="pervious_approvers" type="string_full_utf8"/>
         <element default="No" label="IsOptions" max_length="40" name="isoptions" type="string"/>
         <element default="Auto" label="ApprovalType" max_length="40" name="approvaltype" type="string"/>
         <element label="CC" max_length="40" name="cc" type="string"/>
@@ -87,13 +96,19 @@
                 <element inactive_on_update="false" label="A&amp;P expense" sequence="0" value="A&amp;P expense"/>
             </choice>
         </element>
-        <element default="PO" label="PO / Non PO" max_length="40" name="po_non_po" type="choice">
+        <element choice="1" default="NON-PO" label="PO / Non PO" max_length="40" name="po_non_po" type="choice">
             <choice>
                 <element inactive_on_update="false" label="PO" sequence="0" value="PO"/>
                 <element inactive_on_update="false" label="Non PO" sequence="1" value="Non PO"/>
             </choice>
         </element>
         <element label="ID" max_length="40" name="id" type="string"/>
+        <element choice="1" label="RFI recipient" max_length="40" name="rfi_recipien0" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Previous Approver" value="Previous Approver"/>
+                <element inactive_on_update="false" label="Applicant" value="Applicant"/>
+            </choice>
+        </element>
         <element label="Total Invoice Amount After Tax" max_length="38" name="total_line_item" read_only="true" type="currency"/>
         <element label="Total Tax Amount" max_length="40" name="total_tax_amount" read_only="true" type="string"/>
         <element label="Text" max_length="40" name="tex0" read_only="true" type="string"/>

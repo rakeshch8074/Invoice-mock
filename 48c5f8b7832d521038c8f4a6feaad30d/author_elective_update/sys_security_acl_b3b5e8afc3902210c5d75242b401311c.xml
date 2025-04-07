@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl">
+    <sys_security_acl action="DELETE">
+        <active>true</active>
+        <admin_overrides>true</admin_overrides>
+        <advanced>false</advanced>
+        <applies_to/>
+        <condition/>
+        <decision_type>allow</decision_type>
+        <description>RFI DEtailsInvoice</description>
+        <local_or_existing>Local</local_or_existing>
+        <name>3b865dc3c3082210c5d75242b401314e</name>
+        <operation display_value="execute">execute</operation>
+        <script/>
+        <security_attribute/>
+        <sys_class_name>sys_security_acl</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-03-21 06:50:14</sys_created_on>
+        <sys_id>b3b5e8afc3902210c5d75242b401311c</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>3b865dc3c3082210c5d75242b401314e</sys_name>
+        <sys_package display_value="Invoices" source="x_1097202_invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_scope>
+        <sys_update_name>sys_security_acl_b3b5e8afc3902210c5d75242b401311c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-03-21 06:58:15</sys_updated_on>
+        <type display_value="ux_data_broker">6d9c40e9531210101cb3ddeeff7b12f6</type>
+    </sys_security_acl>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Invoices">48c5f8b7832d521038c8f4a6feaad30d</application>
+        <file_path/>
+        <instance_id>3185c048db32f9d4b1eb9027c596191d</instance_id>
+        <instance_name>dev222928</instance_name>
+        <name>sys_security_acl_b3b5e8afc3902210c5d75242b401311c</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl"><sys_security_acl action="INSERT_OR_UPDATE"><active>true</active><admin_overrides>true</admin_overrides><advanced>false</advanced><applies_to/><condition/><decision_type>allow</decision_type><description>RFI DEtailsInvoice</description><local_or_existing>Local</local_or_existing><name>3b865dc3c3082210c5d75242b401314e</name><operation display_value="execute">execute</operation><script/><security_attribute/><sys_class_name>sys_security_acl</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2025-03-21 06:50:14</sys_created_on><sys_id>b3b5e8afc3902210c5d75242b401311c</sys_id><sys_mod_count>1</sys_mod_count><sys_name>3b865dc3c3082210c5d75242b401314e</sys_name><sys_package display_value="Invoices" source="x_1097202_invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_package><sys_policy/><sys_scope display_value="Invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_scope><sys_update_name>sys_security_acl_b3b5e8afc3902210c5d75242b401311c</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2025-03-21 06:58:15</sys_updated_on><type display_value="ux_data_broker">6d9c40e9531210101cb3ddeeff7b12f6</type></sys_security_acl></record_update>]]></payload>
+        <payload_hash>893849647</payload_hash>
+        <record_name>3b865dc3c3082210c5d75242b401314e</record_name>
+        <reverted_from/>
+        <source>60cbdb93c3131210c5d75242b40131b5</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-03-21 06:58:16</sys_created_on>
+        <sys_id>eac728e3c3d02210c5d75242b401316e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>195b77ed1630000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-03-21 06:58:16</sys_updated_on>
+        <type>Access Control</type>
+        <update_guid>52c728e349d0221036854da3f9b7d66e</update_guid>
+        <update_guid_history>52c728e349d0221036854da3f9b7d66e:893849647,34f56c2372d022106e1bb40391392680:-694170370</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-03-21 09:42:12</sys_created_on>
+        <sys_db_object display_value="" name="sys_security_acl">sys_security_acl</sys_db_object>
+        <sys_id>7a1b666708724394bf42d9921e5f5044</sys_id>
+        <sys_metadata>b3b5e8afc3902210c5d75242b401311c</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>3b865dc3c3082210c5d75242b401314e</sys_name>
+        <sys_package display_value="Invoices" source="x_1097202_invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_scope>
+        <sys_scope_delete display_value="">06eacfb531f84c0c80adc050aaeca810</sys_scope_delete>
+        <sys_update_name>sys_security_acl_b3b5e8afc3902210c5d75242b401311c</sys_update_name>
+        <sys_update_version display_value="sys_security_acl_b3b5e8afc3902210c5d75242b401311c">eac728e3c3d02210c5d75242b401316e</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-03-21 09:42:12</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

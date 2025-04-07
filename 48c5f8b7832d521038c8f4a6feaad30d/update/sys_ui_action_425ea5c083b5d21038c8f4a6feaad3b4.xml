@@ -4,12 +4,13 @@
         <active>true</active>
         <client>true</client>
         <client_script_v2><![CDATA[function onClick(g_form) {
-    alert("Hi");
+    //alert("Hi");
     g_form.setValue('state', 1);
     g_form.submit('submit_record');
+	//g_form.reload();
 }]]></client_script_v2>
         <comments/>
-        <condition/>
+        <condition>current.state == "6"</condition>
         <form_action>true</form_action>
         <form_button>true</form_button>
         <form_button_v2>true</form_button_v2>
@@ -32,18 +33,22 @@
         <name>Submit</name>
         <onclick>wbsSubmit()</onclick>
         <order>150</order>
-        <script><![CDATA[function wbsSubmit(){
-	g_form.setValue('state', 1);
-	
-	gsftSubmit(null, g_form.getFormElement(), 'submit_record');
+        <script><![CDATA[function wbsSubmit() {
+    g_form.setValue('state', 1);
+
+    gsftSubmit(null, g_form.getFormElement(), 'submit_record');
+	gs.info("line 5 before refresh");
+    //window.location.reload();
 }
 
 if (typeof window == 'undefined')
-	updateWBS();
+    updateWBS();
 
-function updateWBS(){
-	current.state = 1;
-	current.update();
+function updateWBS() {
+    current.state = 1;
+    current.update();
+	gs.info("line 15 before refresh");
+   location.reload();
 }]]></script>
         <show_insert>false</show_insert>
         <show_multiple_update>false</show_multiple_update>
@@ -55,7 +60,7 @@ function updateWBS(){
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>425ea5c083b5d21038c8f4a6feaad3b4</sys_id>
-        <sys_mod_count>6</sys_mod_count>
+        <sys_mod_count>16</sys_mod_count>
         <sys_name>Submit</sys_name>
         <sys_overrides/>
         <sys_package display_value="Invoices" source="x_1097202_invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_package>
@@ -63,7 +68,7 @@ function updateWBS(){
         <sys_scope display_value="Invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_scope>
         <sys_update_name>sys_ui_action_425ea5c083b5d21038c8f4a6feaad3b4</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2025-02-14 06:17:09</sys_updated_on>
+        <sys_updated_on>2025-03-25 06:23:22</sys_updated_on>
         <table>x_1097202_invoices_invoice</table>
         <ui11_compatible>true</ui11_compatible>
         <ui16_compatible>false</ui16_compatible>

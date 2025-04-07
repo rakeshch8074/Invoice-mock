@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_m2m">
+    <sys_m2m action="INSERT_OR_UPDATE">
+        <from_table>x_1097202_invoices_invoice_attachments</from_table>
+        <m2m_from_field>x_1097202_invoices_invoice_attachments</m2m_from_field>
+        <m2m_from_label>Attachments</m2m_from_label>
+        <m2m_table>x_1097202_invoices_m2m_x_1097202_in_sys_attachme</m2m_table>
+        <m2m_to_field>sys_attachment</m2m_to_field>
+        <m2m_to_label>Invoice Attachments</m2m_to_label>
+        <sys_class_name>sys_m2m</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-02-28 06:16:01</sys_created_on>
+        <sys_id>6544143cc3802210c5d75242b401316d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_1097202_invoices_m2m_x_1097202_in_sys_attachme</sys_name>
+        <sys_package display_value="Invoices" source="x_1097202_invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_scope>
+        <sys_update_name>sys_m2m_6544143cc3802210c5d75242b401316d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-02-28 06:16:01</sys_updated_on>
+        <to_table>sys_attachment</to_table>
+    </sys_m2m>
+</record_update>

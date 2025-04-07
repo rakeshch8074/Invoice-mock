@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="after_rfi" table="x_1097202_invoices_invoice" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>after_rfi</element>
+            <name>x_1097202_invoices_invoice</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2025-03-06 08:55:43</sys_created_on>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>after_rfi</sys_name>
+            <sys_package display_value="Invoices" source="x_1097202_invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_scope>
+            <sys_update_name>sys_choice_x_1097202_invoices_invoice_after_rfi</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2025-03-06 08:55:43</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>after_rfi</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Send back to me</label>
+            <language>en</language>
+            <name>x_1097202_invoices_invoice</name>
+            <sequence/>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2025-03-06 08:55:59</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2025-03-06 08:56:02</sys_updated_on>
+            <value>Send back to me</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>after_rfi</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Start form beginning</label>
+            <language>en</language>
+            <name>x_1097202_invoices_invoice</name>
+            <sequence/>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2025-03-06 08:55:43</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2025-03-06 08:55:49</sys_updated_on>
+            <value>Start form beginning</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

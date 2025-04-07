@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_1097202_invoices.RFIHandlerInvoice</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <mobile_callable>false</mobile_callable>
+        <name>RFIHandlerInvoice</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[var RFIHandlerInvoice = Class.create();
+RFIHandlerInvoice.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+
+    type: 'RFIHandlerInvoice',
+
+    // getPreviousApprovers: function(parent) {
+    //     var approver = [];
+    //     var parentId = this.getParameter('sysparm_parentid') || parent;
+
+    //     var gr = new GlideRecord('u_approval_history'); //Check Table invoice approval history
+    //     gr.addQuery('parent', parentId);
+    //     gr.addQuery('x_1097202_epos_decision_taken', 'approved');
+    //     gr.query();
+
+    //     while (gr.next()) {
+    //         approver.push({
+    //             label: gr.approver.name.getDisplayValue(),
+    //             id: gr.approver.sys_id.getDisplayValue(),
+    //         });
+    //     }
+
+    //     gs.info("TESTING VALUE " + JSON.stringify(approver))
+    //     return JSON.stringify(approver);
+    // },
+    getPreviousApprovers: function(parent) {
+        var approver = [];
+        var parentId = this.getParameter('sysparm_parentid') || parent;
+
+        var gr = new GlideRecord('u_approval_history');
+        gr.addQuery('parent', parentId);
+        gr.addQuery('x_1097202_epos_decision_taken', 'approved');
+        gr.query();
+
+        while (gr.next()) {
+            approver.push({
+                label: gr.x_1097202_epos_approver.name.getDisplayValue(),
+                id: gr.x_1097202_epos_approver.sys_id.getDisplayValue(),
+            });
+        }
+
+        gs.info("TESTING VALUE " + JSON.stringify(approver))
+        return JSON.stringify(approver);
+    },
+
+    handleRFI: function(parent, userid, afterRFI, rfiRecipient, previousApprover, cmmnt) {
+        try {
+            var incParent = this.getParameter('sysparm_inc_parent') || parent;
+            var currentUserSysId = this.getParameter('sysparm_current_user') || userid;
+            var after_rfi = this.getParameter('sysparm_after_rfi') || afterRFI;
+            var rfi_recipient = this.getParameter('sysparm_rfi_recipient') || rfiRecipient;
+            var previous_approver = this.getParameter('sysparm_previous_approver') || previousApprover;
+            var comment = this.getParameter('sysparm_inc_comments') || cmmnt;
+            var approvalGrp;
+            var flowSysId;
+
+            gs.info('incParent: ' + incParent + ', currentUserSysId: ' + currentUserSysId + ', after_rfi: ' + after_rfi + ', rfi_recipient: ' + rfi_recipient + ', previous_approver: ' + previous_approver + ', comment: ' + comment);
+            gs.info('value of applicant' + rfi_recipient);
+            // Update Parent Record
+
+            var gr = new GlideRecord('x_1097202_invoices_invoice'); //which table main invoice
+            if (gr.get(incParent)) {
+                flowSysId = gr.getValue('workflow_context');
+                approvalGrp = gr.getValue('assignment_group');
+                gr.setValue('state', 20);
+                if (after_rfi == "usr1") {
+                    gr.setValue('after_rfi', 'Send back to me'); //Start form beginning
+                } else {
+                    gr.setValue('after_rfi', 'Start form beginning'); //Send back to me
+                }
+
+                var applicantName = gr.applicant_name.sys_id.getDisplayValue();
+                if (rfi_recipient == 'applicant') {
+                    gs.info('line 49 inside applicant' + applicantName);
+                    gr.rfi_recipien0 = 'Applicant';
+                    gr.assigned_to = applicantName;
+                } else {
+                    gr.setValue('rfi_recipien0', 'Previous Approver');
+                    gr.setValue('assigned_to', previous_approver);
+                    gr.assignment_group = this.getPreviousApproverGroup(incParent, previous_approver);
+                }
+                gs.info('line 57 RFI');
+                if (after_rfi == 'usr1') {
+                    var grApproval = new GlideRecord('sysapproval_approver')
+                    //grApproval.addQuery('sysapproval', incParent);
+                    grApproval.addEncodedQuery('sysapproval=' + incParent + '^state=requested')
+                    grApproval.query();
+                    while (grApproval.next()) {
+                        grApproval.state = 'not_required';
+                        grApproval.update();
+                    }
+                    var now_GR = new GlideRecord("sys_flow_context");
+                    if (now_GR.get(flowSysId)) {
+                        sn_fd.FlowAPI.cancel(now_GR.getUniqueValue(), 'Cancelling this flow for redundant request');
+                    }
+                } else {
+                    gr.setValue('pervious_approvers', currentUserSysId);
+                }
+
+                gr.update();
+            }
+
+            // Get Created On
+            gs.info("before History line 73");
+            var grApproval = new GlideRecord('sysapproval_approver')
+            grApproval.addQuery('sysapproval', incParent);
+            // grApproval.addQuery('approver', previous_approver)
+            grApproval.orderByDesc('sys_created_on');
+            grApproval.setLimit(1);
+            grApproval.query();
+            if (!grApproval.next()) {
+                gs.info("Unable to create Approval History sysapproval_approver");
+                return;
+            }
+            var approvalCreatedOn = grApproval.sys_created_on;
+
+            // Get level
+            var level = this.getLevel(incParent, approvalGrp);
+
+            gs.info("Level: " + level);
+            gs.info("while History line 91");
+            var grApprovalHistory = new GlideRecord('u_approval_history'); //invoice approval
+            grApprovalHistory.initialize();
+            grApprovalHistory.setValue('parent', incParent);
+            grApprovalHistory.setValue('x_1097202_epos_level', level);
+            grApprovalHistory.setValue('x_1097202_epos_user_role', approvalGrp);
+            grApprovalHistory.setValue('x_1097202_epos_update', new GlideDateTime());
+            grApprovalHistory.setValue('x_1097202_epos_decision_taken', 'RFI');
+            grApprovalHistory.setValue('x_1097202_invoices_comment', comment);
+            grApprovalHistory.setValue('x_1097202_epos_assign_date_time', approvalCreatedOn); //change field
+            grApprovalHistory.setValue('x_1097202_epos_approver', currentUserSysId);
+            grApprovalHistory.insert();
+        } catch (err) {
+            gs.info(err);
+        }
+
+    },
+
+    handleRFIResponse: function(parent, cmmnt) {
+        try {
+            var incParent = this.getParameter('sysparm_inc_parent') || parent;
+            var comment = this.getParameter('sysparm_inc_comments') || cmmnt;
+            gs.info('incParent: ' + incParent + ', comment: ' + comment);
+            var gr = new GlideRecord('x_1097202_invoices_invoice'); //check main invoice
+            if (!gr.get(incParent)) {
+                gs.info('Record Not Found');
+                return;
+            }
+            if (gr.get(incParent)) {
+                var getRfiLevel = new GlideRecord('u_approval_history');
+                getRfiLevel.addQuery('parent', incParent);
+                getRfiLevel.addQuery('x_1097202_epos_decision_taken', 'RFI');
+                getRfiLevel.orderByDesc('sys_created_on');
+                getRfiLevel.query();
+                while (getRfiLevel.next()) {
+                    gs.info("RFI LEVEL" + getRfiLevel.x_1097202_epos_level);
+                }
+                var afterRfi = gr.getValue('after_rfi');
+                var rfilevel = getRfiLevel.x_1097202_epos_level;
+                var approvalCreatedOn = gr.getValue('sys_updated_on');
+                var approvalGrp = gr.getValue('assigned_to') == gr.getValue('applicant_name') ? '' : gr.setValue('assignment_group');
+                gr.setValue('state', -5);
+                gr.setValue('work_notes', comment);
+            }
+            if (afterRfi == 'Send back to me') {
+                gs.info("line 118 send it to me");
+                gr.setValue('assigned_to', gr.pervious_approvers);
+                gr.update();
+            } else if (afterRfi == 'Start form beginning') {
+                gs.info("line 118 Start from beginning");
+                //   gr.update();
+
+                // var inputs = {};
+                // inputs['current'] = incParent; // GlideRecord of table:  
+                // inputs['table_name'] = 'x_1040502_eso_mo_0_eso_approval';
+
+                // // Start Asynchronously: Uncomment to run in background.
+                // sn_fd.FlowAPI.getRunner().flow('x_1040502_eso_mo_0.eso').inBackground().withInputs(inputs).run();
+
+
+                try {
+                    var inputs = {};
+                    inputs['current'] = gr; // GlideRecord of table:  
+                    inputs['table_name'] = 'x_1097202_invoices_invoice';
+
+                    // Start Asynchronously: Uncomment to run in background.
+                    // sn_fd.FlowAPI.getRunner().flow('x_1097202_invoices.invoice_approval_flow').inBackground().withInputs(inputs).run();
+
+                    // Execute Synchronously: Run in foreground.
+                    sn_fd.FlowAPI.getRunner().flow('x_1097202_invoices.invoice_approval_flow').inForeground().withInputs(inputs).run();
+
+                } catch (ex) {
+                    var message = ex.getMessage();
+                    gs.error(message);
+                }
+
+
+
+            }
+
+
+            // create approval history
+
+
+
+            var grApprovalHistory = new GlideRecord('u_approval_history'); //approval history invoice
+            grApprovalHistory.initialize();
+            grApprovalHistory.setValue('parent', incParent);
+            grApprovalHistory.setValue('x_1097202_epos_level', rfilevel);
+            grApprovalHistory.setValue('x_1097202_epos_user_role', approvalGrp);
+            grApprovalHistory.setValue('x_1097202_epos_update', new GlideDateTime());
+            grApprovalHistory.setValue('x_1097202_epos_decision_taken', 'RFI Response');
+            grApprovalHistory.setValue('x_1097202_invoices_comment', comment); //which field to take
+            grApprovalHistory.setValue('x_1097202_epos_assign_date_time', approvalCreatedOn); //chnage field
+            grApprovalHistory.setValue('x_1097202_epos_approver', gs.getUserID());
+            grApprovalHistory.insert();
+        } catch (err) {
+            gs.info("Error in SI")
+            gs.info(err)
+        }
+    },
+
+    getLevel: function(parentId, approvalGrp) {
+        var grRoutingPreview = new GlideRecord('x_1097202_invoices_approval_routing_preview'); //invoice routing
+        grRoutingPreview.addQuery('parent', parentId);
+        grRoutingPreview.addQuery('approval_group', approvalGrp)
+        grRoutingPreview.setLimit(1);
+        grRoutingPreview.query();
+        if (!grRoutingPreview.next()) {
+            gs.info("Unable to create Approval History x_1040502_eso_mo_0_approval_routing_previews");
+            return;
+        }
+        return grRoutingPreview.getValue('level');
+
+    },
+
+    getPreviousApproverGroup: function(parent, prevoiusApprover) {
+        var approver = [];
+        var parentId = parent;
+
+        var gr = new GlideRecord('u_approval_history'); //invoice approval history
+        gr.addQuery('parent', parentId);
+        gr.addQuery('x_1097202_epos_approver', prevoiusApprover)
+        gr.addQuery('x_1097202_epos_decision_taken', 'approved');
+        gr.query();
+
+        if (gr.next()) {
+            return gr.x_1097202_epos_user_role.sys_id.getDisplayValue();
+        } else {
+            gs.info("SI RFIHandlerInvoice getPreviousApproverGroup APPROVAL HISTORY RECORD NOT FOUND")
+            throw new Error('Cannot find Approver')
+        }
+    },
+
+
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-03-06 08:50:55</sys_created_on>
+        <sys_id>10d0b36ec3442210c5d75242b401316c</sys_id>
+        <sys_mod_count>23</sys_mod_count>
+        <sys_name>RFIHandlerInvoice</sys_name>
+        <sys_package display_value="Invoices" source="x_1097202_invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_scope>
+        <sys_update_name>sys_script_include_10d0b36ec3442210c5d75242b401316c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-03-26 06:54:24</sys_updated_on>
+    </sys_script_include>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>10d0b36ec3442210c5d75242b401316c</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-03-06 08:50:55</sys_created_on>
+        <sys_id>62b1376ec3442210c5d75242b40131bc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-03-06 08:50:55</sys_updated_on>
+        <table>sys_script_include</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

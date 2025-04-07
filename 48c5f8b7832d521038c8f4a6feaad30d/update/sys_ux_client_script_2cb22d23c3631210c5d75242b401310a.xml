@@ -2,7 +2,7 @@
     <sys_ux_client_script action="INSERT_OR_UPDATE">
         <controller_preset/>
         <includes/>
-        <macroponent display_value="Invoice Creation">83950859c31bd210c5d75242b40131e8</macroponent>
+        <macroponent display_value="Invoice(s) Creation">83950859c31bd210c5d75242b40131e8</macroponent>
         <name>New client script 3</name>
         <preset/>
         <required_translations>[]</required_translations>
@@ -20,21 +20,21 @@ console.log("CS Exe"); console.log("CS Executed");
      api.setState('flag',true);
      helpers.modal.close("[component-id$='custom_3']")
      console.log("CS Executed completed after 10 sec");
-    }, 5000); 
+    }, 10000); 
 }]]></script>
         <script_api_version>2.0.0</script_api_version>
         <sys_class_name>sys_ux_client_script</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2025-02-12 04:46:13</sys_created_on>
         <sys_id>2cb22d23c3631210c5d75242b401310a</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>5</sys_mod_count>
         <sys_name>New client script 3</sys_name>
         <sys_package display_value="Invoices" source="x_1097202_invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_package>
         <sys_policy/>
         <sys_scope display_value="Invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_scope>
         <sys_update_name>sys_ux_client_script_2cb22d23c3631210c5d75242b401310a</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2025-02-12 04:51:24</sys_updated_on>
+        <sys_updated_on>2025-03-24 05:32:07</sys_updated_on>
         <target>macroponent</target>
         <type>default</type>
     </sys_ux_client_script>

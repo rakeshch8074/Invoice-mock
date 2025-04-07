@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_1097202_invoices.updateApprovalRejectInvoice</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <mobile_callable>false</mobile_callable>
+        <name>updateApprovalRejectInvoice</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[var updateApprovalRejectInvoice = Class.create();
+updateApprovalRejectInvoice.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+updateApprovalHistory: function(parent,userid,comment) {
+        var parameter = this.getParameter('sysparm_inc_parent') || parent;
+        var comments = this.getParameter('sysparm_inc_comments') || comment;
+
+		gs.info(`Parent ${parameter} comment ${comments}`)
+
+
+
+        var approvalRecord = new GlideRecord('sysapproval_approver');
+        approvalRecord.addQuery('document_id', parameter);
+		approvalRecord.addQuery('state', 'requested');
+        approvalRecord.query();
+        while (approvalRecord.next()) {
+            approvalRecord.setValue('u_comment', comments);
+            approvalRecord.setValue('state', 'approved');
+            approvalRecord.update();
+        }
+    },
+    updateRejectionHistory: function(parent,userid,comment) {
+        var parameter = this.getParameter('sysparm_inc_parent') || parent;
+        var comments = this.getParameter('sysparm_inc_comments') || comment;
+
+		gs.info(`From SI ${comments}`)
+        var approvalRecord = new GlideRecord('sysapproval_approver');
+        approvalRecord.addQuery('document_id', parameter);
+		approvalRecord.addQuery('state', 'requested');
+        approvalRecord.query();
+        while (approvalRecord.next()) {
+            approvalRecord.setValue('u_comment', comments);
+            approvalRecord.setValue('state', 'rejected');
+            approvalRecord.update();
+        }
+    },
+    type: 'updateApprovalRecordsfromUI'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-03-07 10:57:38</sys_created_on>
+        <sys_id>12b71947c3082210c5d75242b40131c0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>updateApprovalRejectInvoice</sys_name>
+        <sys_package display_value="Invoices" source="x_1097202_invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_scope>
+        <sys_update_name>sys_script_include_12b71947c3082210c5d75242b40131c0</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-03-07 10:57:38</sys_updated_on>
+    </sys_script_include>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>12b71947c3082210c5d75242b40131c0</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-03-07 10:57:37</sys_created_on>
+        <sys_id>50581987c3082210c5d75242b401313d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-03-07 10:57:37</sys_updated_on>
+        <table>sys_script_include</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

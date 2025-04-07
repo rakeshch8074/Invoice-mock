@@ -29,7 +29,7 @@
         <element attributes="edge_encryption_enabled=true,import_attribute_name=Invoice Number" label="Invoice Number" max_length="40" name="u_invoice_number" type="string"/>
         <element attributes="import_attribute_name=Vendor code" label="Vendor code" max_length="40" name="u_vendor_code" type="integer"/>
         <element attributes="edge_encryption_enabled=true,import_attribute_name=Tax Code" label="Tax Code" max_length="40" name="u_tax_code" type="string"/>
-        <element attributes="edge_encryption_enabled=true,import_attribute_name=Vendor Name" label="Vendor Name" max_length="41" name="u_vendor_name" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Vendor Name" label="Vendor Name" max_length="1000" name="u_vendor_name" type="string"/>
         <element attributes="edge_encryption_enabled=true,import_attribute_name=Assignment" label="Assignment" max_length="40" name="u_assignment" type="string"/>
         <element attributes="edge_encryption_enabled=true,import_attribute_name=Trade/Non Trade" label="Trade/Non Trade" max_length="40" name="u_trade_non_trade" type="string"/>
         <element attributes="edge_encryption_enabled=true,import_attribute_name=Profit Center" label="Profit Center" max_length="40" name="u_profit_center" type="string"/>

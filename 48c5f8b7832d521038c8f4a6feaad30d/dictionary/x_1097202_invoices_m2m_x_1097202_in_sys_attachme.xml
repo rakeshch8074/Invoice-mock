@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="b2b49478c3802210c5d75242b401319f" label="x_1097202_invoices_m2m_Invoice Attachments_Attachments" max_length="40" name="x_1097202_invoices_m2m_x_1097202_in_sys_attachme" type="collection">
+        <element attributes="encode_utf8=false" label="Attachments" max_length="32" name="sys_attachment" reference="sys_attachment" type="reference"/>
+        <element attributes="encode_utf8=false" label="Invoice Attachments" max_length="32" name="x_1097202_invoices_invoice_attachments" reference="x_1097202_invoices_invoice_attachments" type="reference"/>
+        <element attributes="encode_utf8=false" label="Parent Invoice" max_length="32" name="parent_invoice" reference="x_1097202_invoices_invoice" type="reference"/>
+        <index name="index">
+            <element name="parent_invoice"/>
+        </index>
+        <index name="index2">
+            <element name="sys_attachment"/>
+        </index>
+    </element>
+</database>

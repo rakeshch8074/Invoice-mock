@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_data_broker_transform">
+    <sys_ux_data_broker_transform action="INSERT_OR_UPDATE">
+        <acl_failure_result/>
+        <api_name>x_1097202_invoices.RFI Response Invoice</api_name>
+        <batch_exclude>false</batch_exclude>
+        <description/>
+        <mutates_server_data>true</mutates_server_data>
+        <name>RFI Response Invoice</name>
+        <output_schema/>
+        <private>false</private>
+        <props>[&#13;
+    {&#13;
+        "name": "parent",&#13;
+        "label": "Parent Record",&#13;
+        "description": "The parent record identifier",&#13;
+        "fieldType": "string",&#13;
+        "mandatory": true,&#13;
+        "defaultValue": ""&#13;
+    },&#13;
+    {&#13;
+        "name": "userid",&#13;
+        "label": "User ID",&#13;
+        "description": "The ID of the user",&#13;
+        "fieldType": "string",&#13;
+        "mandatory": true,&#13;
+        "defaultValue": ""&#13;
+    },&#13;
+    {&#13;
+        "name": "comment",&#13;
+        "label": "Comment",&#13;
+        "description": "Additional comments",&#13;
+        "fieldType": "string",&#13;
+        "mandatory": false,&#13;
+        "defaultValue": ""&#13;
+    }&#13;
+]</props>
+        <required_translations>[ {
+  "message" : "Additional comments",
+  "comment" : ""
+}, {
+  "message" : "Comment",
+  "comment" : ""
+}, {
+  "message" : "Parent Record",
+  "comment" : ""
+}, {
+  "message" : "The ID of the user",
+  "comment" : ""
+}, {
+  "message" : "The parent record identifier",
+  "comment" : ""
+}, {
+  "message" : "User ID",
+  "comment" : ""
+} ]</required_translations>
+        <schema_version>1.0.0</schema_version>
+        <script><![CDATA[function transform(input) {
+    var rfiResponse = new x_1097202_invoices.RFIHandlerInvoice();
+    gs.info(`From Transform parent ${input.parent}, userid ${input.userid}, comment ${input.comment}`);
+    rfiResponse.handleRFIResponse(input.parent, input.comment);
+}]]></script>
+        <sys_class_name>sys_ux_data_broker_transform</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-03-07 10:48:36</sys_created_on>
+        <sys_id>26f51dc3c3082210c5d75242b40131fe</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>RFI Response Invoice</sys_name>
+        <sys_package display_value="Invoices" source="x_1097202_invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_scope>
+        <sys_update_name>sys_ux_data_broker_transform_26f51dc3c3082210c5d75242b40131fe</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-03-07 10:48:36</sys_updated_on>
+    </sys_ux_data_broker_transform>
+    <sys_translated_text action="delete_multiple" query="documentkey=26f51dc3c3082210c5d75242b40131fe"/>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>26f51dc3c3082210c5d75242b40131fe</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-03-07 10:48:36</sys_created_on>
+        <sys_id>0c4615c3c3082210c5d75242b4013184</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-03-07 10:48:36</sys_updated_on>
+        <table>sys_ux_data_broker_transform</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

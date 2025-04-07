@@ -70,6 +70,20 @@
             <sys_updated_by>admin</sys_updated_by>
             <sys_updated_on>2024-11-05 15:06:42</sys_updated_on>
         </sys_ui_form_section>
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>5</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2025-03-06 08:00:33</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>f436ebaec3042210c5d75242b401319b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_1097202_invoices_invoice" name="x_1097202_invoices_invoice" sys_domain="global" view="Default view">6ff041f7836d521038c8f4a6feaad378</sys_ui_form>
+            <sys_ui_section caption="RFI" display_value="RFI" name="x_1097202_invoices_invoice" sys_domain="global" view="Default view">f836ebaec3042210c5d75242b4013198</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2025-03-06 08:00:33</sys_updated_on>
+        </sys_ui_form_section>
         <sys_ui_form action="INSERT_OR_UPDATE">
             <name>x_1097202_invoices_invoice</name>
             <roles/>

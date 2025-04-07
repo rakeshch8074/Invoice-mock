@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="use_document_viewer=true" db_object_id="1d281070c3c02210c5d75242b4013123" label="x_1097202_invoices_m2m_Invoices_Attachments" max_length="40" name="x_1097202_invoices_m2m_x_1097202_in_attachment" type="collection">
+        <element attributes="encode_utf8=false" label="Invoices" max_length="32" name="x_1097202_invoices_invoice" reference="x_1097202_invoices_invoice" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Vendor Code" max_length="40" name="vendor_code" type="string"/>
+        <element attributes="encode_utf8=false" label="Attachments" max_length="32" name="sys_attachment" reference="sys_attachment" type="reference"/>
+        <element attributes="encode_utf8=false" label="Child Invoice" max_length="32" name="child_invoice" reference="x_1097202_invoices_invoice_attachments" type="reference"/>
+        <index name="index">
+            <element name="child_invoice"/>
+        </index>
+        <index name="index2">
+            <element name="sys_attachment"/>
+        </index>
+        <index name="index3">
+            <element name="x_1097202_invoices_invoice"/>
+        </index>
+    </element>
+</database>

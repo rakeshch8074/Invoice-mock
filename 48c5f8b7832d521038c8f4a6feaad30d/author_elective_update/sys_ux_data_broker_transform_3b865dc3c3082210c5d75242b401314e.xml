@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_data_broker_transform">
+    <sys_ux_data_broker_transform action="DELETE">
+        <acl_failure_result/>
+        <api_name>x_1097202_invoices.RFIDetailsInvoice</api_name>
+        <batch_exclude>false</batch_exclude>
+        <description/>
+        <mutates_server_data>false</mutates_server_data>
+        <name>RFIDetailsInvoice</name>
+        <output_schema/>
+        <private>false</private>
+        <props>[&#13;
+    {&#13;
+        "name": "sys_id",&#13;
+        "label": "Record Sys ID",&#13;
+        "description": "The sys_id of the record",&#13;
+        "fieldType": "string",&#13;
+        "mandatory": true,&#13;
+        "defaultValue": ""&#13;
+    }&#13;
+]</props>
+        <required_translations>[ {
+  "message" : "Record Sys ID",
+  "comment" : ""
+}, {
+  "message" : "The sys_id of the record",
+  "comment" : ""
+} ]</required_translations>
+        <schema_version>1.0.0</schema_version>
+        <script><![CDATA[function transfrom(input){
+
+	var sysId = input.sys_id
+	
+	if(sysId == "" || sysId == null) return "Invalid Sys ID"
+
+	var rfidetails = {
+		rfiRecipient : [{
+			id : "applicant",
+			label : "Applicant"
+		}],
+		previousApprovers : [],
+	}
+
+
+	var rfiHandler = new x_1097202_invoices.RFIHandlerInvoice();
+	var previousApprovers =  JSON.parse(rfiHandler.getPreviousApprovers(input.sys_id));
+	gs.info(previousApprovers.length)
+	// console.log(previousApprovers)
+	if(previousApprovers.length > 0){
+		rfidetails.rfiRecipient.push({
+			id : "previous_approver",
+			label : "Previous Approver"
+		})
+
+		rfidetails.previousApprovers = previousApprovers
+	}
+
+	return rfidetails;
+}]]></script>
+        <sys_class_name>sys_ux_data_broker_transform</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-03-07 10:50:41</sys_created_on>
+        <sys_id>3b865dc3c3082210c5d75242b401314e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>RFIDetailsInvoice</sys_name>
+        <sys_package display_value="Invoices" source="x_1097202_invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_scope>
+        <sys_update_name>sys_ux_data_broker_transform_3b865dc3c3082210c5d75242b401314e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-03-07 10:50:41</sys_updated_on>
+    </sys_ux_data_broker_transform>
+    <sys_translated_text action="DELETE" query="documentkey=3b865dc3c3082210c5d75242b401314e"/>
+    <sys_es_latest_script action="DELETE">
+        <id>3b865dc3c3082210c5d75242b401314e</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-03-07 10:50:40</sys_created_on>
+        <sys_id>eeb65107c3082210c5d75242b401310f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-03-07 10:50:40</sys_updated_on>
+        <table>sys_ux_data_broker_transform</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Invoices">48c5f8b7832d521038c8f4a6feaad30d</application>
+        <file_path/>
+        <instance_id>3185c048db32f9d4b1eb9027c596191d</instance_id>
+        <instance_name>dev222928</instance_name>
+        <name>sys_ux_data_broker_transform_3b865dc3c3082210c5d75242b401314e</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_ux_data_broker_transform"&gt;&lt;sys_ux_data_broker_transform action="INSERT_OR_UPDATE"&gt;&lt;acl_failure_result/&gt;&lt;api_name&gt;x_1097202_invoices.RFIDetailsInvoice&lt;/api_name&gt;&lt;batch_exclude&gt;false&lt;/batch_exclude&gt;&lt;description/&gt;&lt;mutates_server_data&gt;false&lt;/mutates_server_data&gt;&lt;name&gt;RFIDetailsInvoice&lt;/name&gt;&lt;output_schema/&gt;&lt;private&gt;false&lt;/private&gt;&lt;props&gt;[&amp;#13;
+    {&amp;#13;
+        "name": "sys_id",&amp;#13;
+        "label": "Record Sys ID",&amp;#13;
+        "description": "The sys_id of the record",&amp;#13;
+        "fieldType": "string",&amp;#13;
+        "mandatory": true,&amp;#13;
+        "defaultValue": ""&amp;#13;
+    }&amp;#13;
+]&lt;/props&gt;&lt;required_translations&gt;[ {
+  "message" : "Record Sys ID",
+  "comment" : ""
+}, {
+  "message" : "The sys_id of the record",
+  "comment" : ""
+} ]&lt;/required_translations&gt;&lt;schema_version&gt;1.0.0&lt;/schema_version&gt;&lt;script&gt;&lt;![CDATA[function transfrom(input){
+
+	var sysId = input.sys_id
+	
+	if(sysId == "" || sysId == null) return "Invalid Sys ID"
+
+	var rfidetails = {
+		rfiRecipient : [{
+			id : "applicant",
+			label : "Applicant"
+		}],
+		previousApprovers : [],
+	}
+
+
+	var rfiHandler = new x_1097202_invoices.RFIHandlerInvoice();
+	var previousApprovers =  JSON.parse(rfiHandler.getPreviousApprovers(input.sys_id));
+	gs.info(previousApprovers.length)
+	// console.log(previousApprovers)
+	if(previousApprovers.length &gt; 0){
+		rfidetails.rfiRecipient.push({
+			id : "previous_approver",
+			label : "Previous Approver"
+		})
+
+		rfidetails.previousApprovers = previousApprovers
+	}
+
+	return rfidetails;
+}]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_ux_data_broker_transform&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2025-03-07 10:50:41&lt;/sys_created_on&gt;&lt;sys_id&gt;3b865dc3c3082210c5d75242b401314e&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_name&gt;RFIDetailsInvoice&lt;/sys_name&gt;&lt;sys_package display_value="Invoices" source="x_1097202_invoices"&gt;48c5f8b7832d521038c8f4a6feaad30d&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Invoices"&gt;48c5f8b7832d521038c8f4a6feaad30d&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_ux_data_broker_transform_3b865dc3c3082210c5d75242b401314e&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2025-03-07 10:50:41&lt;/sys_updated_on&gt;&lt;/sys_ux_data_broker_transform&gt;&lt;sys_translated_text action="delete_multiple" query="documentkey=3b865dc3c3082210c5d75242b401314e"/&gt;&lt;sys_es_latest_script action="INSERT_OR_UPDATE"&gt;&lt;id&gt;3b865dc3c3082210c5d75242b401314e&lt;/id&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2025-03-07 10:50:40&lt;/sys_created_on&gt;&lt;sys_id&gt;eeb65107c3082210c5d75242b401310f&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2025-03-07 10:50:40&lt;/sys_updated_on&gt;&lt;table&gt;sys_ux_data_broker_transform&lt;/table&gt;&lt;use_es_latest&gt;true&lt;/use_es_latest&gt;&lt;/sys_es_latest_script&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>794795516</payload_hash>
+        <record_name>RFIDetailsInvoice</record_name>
+        <reverted_from/>
+        <source>60cbdb93c3131210c5d75242b40131b5</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-03-07 10:50:41</sys_created_on>
+        <sys_id>6eb61dc3c3082210c5d75242b4013162</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>195703a91010000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-03-07 10:50:41</sys_updated_on>
+        <type>Data Broker Server Script</type>
+        <update_guid>62b61dc37908221029668bea70845062</update_guid>
+        <update_guid_history>62b61dc37908221029668bea70845062:794795516</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-03-21 09:42:29</sys_created_on>
+        <sys_db_object display_value="" name="sys_ux_data_broker_transform">sys_ux_data_broker_transform</sys_db_object>
+        <sys_id>3866e394a8104f9894546b83e27edd24</sys_id>
+        <sys_metadata>3b865dc3c3082210c5d75242b401314e</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>RFIDetailsInvoice</sys_name>
+        <sys_package display_value="Invoices" source="x_1097202_invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_scope>
+        <sys_scope_delete display_value="">06eacfb531f84c0c80adc050aaeca810</sys_scope_delete>
+        <sys_update_name>sys_ux_data_broker_transform_3b865dc3c3082210c5d75242b401314e</sys_update_name>
+        <sys_update_version display_value="sys_ux_data_broker_transform_3b865dc3c3082210c5d75242b401314e">6eb61dc3c3082210c5d75242b4013162</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-03-21 09:42:29</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

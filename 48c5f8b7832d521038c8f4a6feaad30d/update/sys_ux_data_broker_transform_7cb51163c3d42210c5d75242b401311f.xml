@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_data_broker_transform">
+    <sys_ux_data_broker_transform action="INSERT_OR_UPDATE">
+        <acl_failure_result/>
+        <api_name>x_1097202_invoices.RFI INvoice</api_name>
+        <batch_exclude>false</batch_exclude>
+        <description/>
+        <mutates_server_data>false</mutates_server_data>
+        <name>RFI INvoice</name>
+        <output_schema/>
+        <private>false</private>
+        <props>[&#13;
+    {&#13;
+        "name": "sys_id",&#13;
+        "label": "Record Sys ID",&#13;
+        "description": "The sys_id of the record",&#13;
+        "fieldType": "string",&#13;
+        "mandatory": true,&#13;
+        "defaultValue": ""&#13;
+    }&#13;
+]</props>
+        <required_translations>[ {
+  "message" : "Record Sys ID",
+  "comment" : ""
+}, {
+  "message" : "The sys_id of the record",
+  "comment" : ""
+} ]</required_translations>
+        <schema_version>1.0.0</schema_version>
+        <script><![CDATA[function transfrom(input) {
+
+    var sysId = input.sys_id;
+
+    if (sysId == "" || sysId == null) return "Invalid Sys ID";
+
+    var rfidetails = {
+        rfiRecipient: [{
+            id: "applicant",
+            label: "Applicant"
+        }],
+        previousApprovers: [],
+    };
+    var rfiHandler = new x_1097202_invoices.RFIHandlerInvoice();
+    var previousApprovers = JSON.parse(rfiHandler.getPreviousApprovers(input.sys_id));
+    gs.info("Data Broker line 16" + previousApprovers);
+    gs.info("Data Broker line 17" + previousApprovers.length);
+    // console.log(previousApprovers)
+    if (previousApprovers.length > 0) {
+        rfidetails.rfiRecipient.push({
+            id: "previous_approver",
+            label: "Previous Approver"
+        });
+
+        rfidetails.previousApprovers = previousApprovers;
+    }
+    gs.info("Data Broker line 26" + JSON.stringify(rfidetails));
+    gs.info("Data Broker line 27" + JSON.stringify(previousApprovers));
+    return rfidetails;
+}]]></script>
+        <sys_class_name>sys_ux_data_broker_transform</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-03-21 10:19:06</sys_created_on>
+        <sys_id>7cb51163c3d42210c5d75242b401311f</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_name>RFI INvoice</sys_name>
+        <sys_package display_value="Invoices" source="x_1097202_invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_scope>
+        <sys_update_name>sys_ux_data_broker_transform_7cb51163c3d42210c5d75242b401311f</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-03-26 09:30:39</sys_updated_on>
+    </sys_ux_data_broker_transform>
+    <sys_translated_text action="delete_multiple" query="documentkey=7cb51163c3d42210c5d75242b401311f"/>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>7cb51163c3d42210c5d75242b401311f</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-03-21 10:19:05</sys_created_on>
+        <sys_id>08c59963c3d42210c5d75242b401314f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-03-21 10:19:05</sys_updated_on>
+        <table>sys_ux_data_broker_transform</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

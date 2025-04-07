@@ -2,7 +2,7 @@
     <sys_script action="INSERT_OR_UPDATE">
         <abort_action>false</abort_action>
         <access>package_private</access>
-        <action_delete>true</action_delete>
+        <action_delete>false</action_delete>
         <action_insert>true</action_insert>
         <action_query>false</action_query>
         <action_update>false</action_update>
@@ -36,7 +36,7 @@
     var parentSys_id = '';
     var parentVendorCode = '';
     var fileName = current.file_name;
-
+    var arr = [];
     var invoiceRecord = new GlideRecord('x_1097202_invoices_invoice_attachments');
     if (invoiceRecord.get(invoiceAttachment)) {
         parentVendorCode = invoiceRecord.vendor_code.getDisplayValue();
@@ -44,12 +44,12 @@
     }
     gs.info("BR Triggered" + parentSys_id);
     if (current.operation() == "insert") {
-        var at = new GlideRecord('sys_attachment');
-        at.addEncodedQuery('table_name=x_1097202_invoices_invoice^table_sys_id=' + parentSys_id);
-        at.query();
-        if (at.next()) {
-            at.deleteMultiple();
-        }
+        // var at = new GlideRecord('sys_attachment');
+        // at.addEncodedQuery('table_name=x_1097202_invoices_invoice^table_sys_id=' + parentSys_id);
+        // at.query();
+        // if (at.next()) {
+        //     at.deleteMultiple();
+        // }
         var createHistory = new GlideRecord("x_1097202_invoices_invoice_documents_history");
         createHistory.initialize();
         createHistory.parent_invoice = invoiceRecord.parent_invoice;
@@ -57,13 +57,21 @@
         createHistory.supporting_document = parentVendorCode + '-' + fileName;
         createHistory.uploaded_by = gs.getUserID();
         createHistory.uploaded_date_time = new GlideDateTime();
-        createHistory.insert();
-        var invoiceRecord = new GlideRecord('x_1097202_invoices_invoice_attachments');
-        invoiceRecord.addEncodedQuery('parent_invoice=' + parentSys_id);
-        invoiceRecord.query();
-        while (invoiceRecord.next) {
-            GlideSysAttachment.copy('x_1097202_invoices_invoice_attachments', invoiceRecord.sys_id, 'x_1097202_invoices_invoice', parentSys_id);
+        var createdRecordSysid = createHistory.insert();
+        // var invoiceRecord = new GlideRecord('x_1097202_invoices_invoice_attachments');
+        // invoiceRecord.addEncodedQuery('parent_invoice=' + parentSys_id);
+        // invoiceRecord.query();
+        // while (invoiceRecord.next) {
+        //     arr.push(invoiceRecord.sys_id);
+        // }
+        // for (var i = 0; i < arr.length; i++) {
+        GlideSysAttachment.copy('x_1097202_invoices_invoice_attachments', parentsysId, 'x_1097202_invoices_invoice', parentSys_id);
+        // //  }
+        var deleteAttachment = new GlideRecord('sys_attachment');
+        if (deleteAttachment.get(current.sys_id)) {
+            deleteAttachment.deleteRecord();
         }
+		// current.addInfoMessage("Supporting Document attached successfully");
     }
 
 
@@ -74,19 +82,19 @@
         if (deleteHistory.next()) {
             deleteHistory.deleteRecord();
         }
-        var at = new GlideRecord('sys_attachment');
-        at.addEncodedQuery('table_name=x_1097202_invoices_invoice^table_sys_id=' + parentSys_id);
-        at.query();
-        if (at.next()) {
-            gs.info("1319091 inside line 14");
-            at.deleteMultiple();
-        }
-        var invoiceRecord = new GlideRecord('x_1097202_invoices_invoice_attachments');
-        invoiceRecord.addEncodedQuery('parent_invoice=' + parentSys_id);
-        invoiceRecord.query();
-        while (invoiceRecord.next) {
-            GlideSysAttachment.copy('x_1097202_invoices_invoice_attachments', invoiceRecord.sys_id, 'x_1097202_invoices_invoice', parentSys_id);
-        }
+        //     var at = new GlideRecord('sys_attachment');
+        //     at.addEncodedQuery('table_name=x_1097202_invoices_invoice^table_sys_id=' + parentSys_id);
+        //     at.query();
+        //     if (at.next()) {
+        //         gs.info("1319091 inside line 14");
+        //         at.deleteMultiple();
+        //     }
+        //     var invoiceRecord = new GlideRecord('x_1097202_invoices_invoice_attachments');
+        //     invoiceRecord.addEncodedQuery('parent_invoice=' + parentSys_id);
+        //     invoiceRecord.query();
+        //     while (invoiceRecord.next) {
+        //         GlideSysAttachment.copy('x_1097202_invoices_invoice_attachments', invoiceRecord.sys_id, 'x_1097202_invoices_invoice', parentSys_id);
+        //     }
 
     }
 })(current, previous);]]></script>
@@ -96,7 +104,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>a04f35c0c3c86210c5d75242b4013164</sys_id>
-        <sys_mod_count>18</sys_mod_count>
+        <sys_mod_count>39</sys_mod_count>
         <sys_name>Attachment Copy</sys_name>
         <sys_overrides/>
         <sys_package display_value="Invoices" source="x_1097202_invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_package>
@@ -104,7 +112,7 @@
         <sys_scope display_value="Invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_scope>
         <sys_update_name>sys_script_a04f35c0c3c86210c5d75242b4013164</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2025-02-26 10:20:56</sys_updated_on>
+        <sys_updated_on>2025-02-27 05:54:02</sys_updated_on>
         <template/>
         <when>after</when>
     </sys_script>

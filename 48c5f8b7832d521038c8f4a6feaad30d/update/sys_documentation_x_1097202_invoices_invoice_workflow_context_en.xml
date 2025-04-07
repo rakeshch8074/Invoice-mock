@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="workflow_context" label="workflow context " language="en" table="x_1097202_invoices_invoice">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>workflow_context</element>
+            <help/>
+            <hint/>
+            <label>workflow context </label>
+            <language>en</language>
+            <name>x_1097202_invoices_invoice</name>
+            <plural>workflow context s</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2025-03-06 08:31:56</sys_created_on>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>workflow context</sys_name>
+            <sys_package display_value="Invoices" source="x_1097202_invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_scope>
+            <sys_update_name>sys_documentation_x_1097202_invoices_invoice_workflow_context_en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2025-03-06 08:31:56</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

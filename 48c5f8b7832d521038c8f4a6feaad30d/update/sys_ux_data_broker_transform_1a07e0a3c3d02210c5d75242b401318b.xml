@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_data_broker_transform">
+    <sys_ux_data_broker_transform action="INSERT_OR_UPDATE">
+        <acl_failure_result/>
+        <api_name>x_1097202_invoices.RFI Data Tranform Invoice</api_name>
+        <batch_exclude>false</batch_exclude>
+        <description/>
+        <mutates_server_data>true</mutates_server_data>
+        <name>RFI Data Tranform Invoice</name>
+        <output_schema/>
+        <private>false</private>
+        <props>[&#13;
+    {&#13;
+        "name": "parent",&#13;
+        "label": "Parent Record",&#13;
+        "description": "The parent record identifier",&#13;
+        "fieldType": "string",&#13;
+        "mandatory": true,&#13;
+        "defaultValue": ""&#13;
+    },&#13;
+    {&#13;
+        "name": "userid",&#13;
+        "label": "User ID",&#13;
+        "description": "The ID of the user",&#13;
+        "fieldType": "string",&#13;
+        "mandatory": true,&#13;
+        "defaultValue": ""&#13;
+    },&#13;
+    {&#13;
+        "name": "afterRFI",&#13;
+        "label": "After RFI",&#13;
+        "description": "Indicates if action is after RFI",&#13;
+        "fieldType": "string",&#13;
+        "mandatory": false,&#13;
+        "defaultValue": false&#13;
+    },&#13;
+    {&#13;
+        "name": "rfiRecipient",&#13;
+        "label": "RFI Recipient",&#13;
+        "description": "The recipient of the RFI",&#13;
+        "fieldType": "string",&#13;
+        "mandatory": true,&#13;
+        "defaultValue": ""&#13;
+    },&#13;
+    {&#13;
+        "name": "previousApprover",&#13;
+        "label": "Previous Approver",&#13;
+        "description": "The previous approver's ID",&#13;
+        "fieldType": "string",&#13;
+        "mandatory": false,&#13;
+        "defaultValue": ""&#13;
+    },&#13;
+    {&#13;
+        "name": "comment",&#13;
+        "label": "Comment",&#13;
+        "description": "Additional comments",&#13;
+        "fieldType": "string",&#13;
+        "mandatory": false,&#13;
+        "defaultValue": ""&#13;
+    }&#13;
+]</props>
+        <required_translations>[ {
+  "message" : "Additional comments",
+  "comment" : ""
+}, {
+  "message" : "After RFI",
+  "comment" : ""
+}, {
+  "message" : "Comment",
+  "comment" : ""
+}, {
+  "message" : "Indicates if action is after RFI",
+  "comment" : ""
+}, {
+  "message" : "Parent Record",
+  "comment" : ""
+}, {
+  "message" : "Previous Approver",
+  "comment" : ""
+}, {
+  "message" : "RFI Recipient",
+  "comment" : ""
+}, {
+  "message" : "The ID of the user",
+  "comment" : ""
+}, {
+  "message" : "The parent record identifier",
+  "comment" : ""
+}, {
+  "message" : "The previous approver's ID",
+  "comment" : ""
+}, {
+  "message" : "The recipient of the RFI",
+  "comment" : ""
+}, {
+  "message" : "User ID",
+  "comment" : ""
+} ]</required_translations>
+        <schema_version>1.0.0</schema_version>
+        <script><![CDATA[function transform(input){
+	var rfiHandler = new x_1097202_invoices.RFIHandlerInvoice();
+	gs.info("check:"+input.parent + "user:"+input.userid+ "afterRFi:"+input.afterRFI+"rfirecip:"+input.rfiRecipient+"perviouseapp:"+input.previousApprover+"comment:"+input.comment);
+	rfiHandler.handleRFI(input.parent,input.userid,input.afterRFI,input.rfiRecipient,input.previousApprover,input.comment);
+}]]></script>
+        <sys_class_name>sys_ux_data_broker_transform</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-03-21 06:56:52</sys_created_on>
+        <sys_id>1a07e0a3c3d02210c5d75242b401318b</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>RFI Data Tranform Invoice</sys_name>
+        <sys_package display_value="Invoices" source="x_1097202_invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Invoices">48c5f8b7832d521038c8f4a6feaad30d</sys_scope>
+        <sys_update_name>sys_ux_data_broker_transform_1a07e0a3c3d02210c5d75242b401318b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-03-21 06:57:16</sys_updated_on>
+    </sys_ux_data_broker_transform>
+    <sys_translated_text action="delete_multiple" query="documentkey=1a07e0a3c3d02210c5d75242b401318b"/>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>1a07e0a3c3d02210c5d75242b401318b</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-03-21 06:56:51</sys_created_on>
+        <sys_id>757728a3c3d02210c5d75242b401310e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-03-21 06:56:51</sys_updated_on>
+        <table>sys_ux_data_broker_transform</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>
